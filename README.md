@@ -20,7 +20,7 @@ brew install cask corelocationcli
 
 ## Usage
 
-`python moon.py` prints he a human-readable moon phase, the percent illuminated, and calendar date of the next New, Full, or Quarter moon event, for example: 
+`python moon.py` prints a human-readable moon phase, the percent illuminated, and calendar date of the next New, Full, or Quarter moon event, for example: 
 
 ```txt
 The Moon today is Waning Gibbous, with 99.16% illuminated
