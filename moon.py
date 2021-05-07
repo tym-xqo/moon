@@ -4,11 +4,14 @@ from datetime import datetime
 from math import radians
 
 import ephem
-from sh import corelocationcli
+
+try:
+    from sh import corelocationcli
+except ImportError:
+    pass
 
 
 def locate_obs():
-    # TODO: try/except in case CoreLocationCLI is not installed
     geo_json_str = str(corelocationcli("-json"))
     geo_json = json.loads(geo_json_str)
     return geo_json
@@ -23,8 +26,6 @@ def setup_observer():
     lng = float(loc["longitude"])
     elv = float(loc["altitude"])
 
-    obs.date = datetime.utcnow()
-
     obs.lat = radians(lat)
     obs.long = radians(lng)
     obs.elevation = elv
@@ -32,7 +33,11 @@ def setup_observer():
     return obs
 
 
-OBS = setup_observer()
+try:
+    OBS = setup_observer()
+except NameError:
+    OBS = ephem.Observer()
+OBS.date = datetime.utcnow()
 
 
 def lunar_illumination(obs=OBS):
@@ -83,6 +88,8 @@ def display(obs=OBS):
     print(output)
     next = next_phase_point(obs)
     next_name = next[0].replace("_", " ").title()
+    if "Quarter" not in next_name:
+        next_name += " Moon"
     next_date = next[1].isoformat()
     output = f"{next_name} upcoming on {next_date}"
     print(output)
