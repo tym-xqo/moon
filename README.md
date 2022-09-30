@@ -1,6 +1,6 @@
 # moon
 
-A simple CLI moon phase toy with [PyEphem](TK) and [CoreLocationCLI](https://github.com/fulldecent/corelocationcli).
+A simple CLI moon phase toy with [PyEphem](https://rhodesmill.org/pyephem/) and [CoreLocationCLI](https://github.com/fulldecent/corelocationcli).
 
 ## Installation
 
